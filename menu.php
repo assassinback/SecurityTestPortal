@@ -7,7 +7,10 @@
     <link rel="apple-touch-icon" sizes="76x76" href="logo.png">
     <link rel="icon" type="image/png" href="logo.png">
     <title>
-        ASK Consultant
+        <?php
+          echo $page_name;
+
+        ?>
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -56,6 +59,12 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
+  <?php
+    // if(!checkLoggedin())
+    // {
+    //   header("Location:login.php");
+    // }
+  ?>
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="sidenav-header">
@@ -68,46 +77,30 @@
     <hr class="horizontal dark mt-0">
     <div class="  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
-
-      <?php
-    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor") || checkPrivilage($_SESSION["user_type"],"case_admin"))
-    {
-      ?>
-        <li class="nav-item">
-          <a class="nav-link " href="show_data.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Students</span>
-          </a>
-        </li>
-<?php
-    }
-?>
 <?php
     if(checkLoggedin())
     {
       ?>
         <li class="nav-item">
-          <a class="nav-link" href="show_inprocess.php">
+          <a class="nav-link" href="dashboard.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Show Inprocess</span>
+            <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
         <?php
     }
 ?><?php
-if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
+if(checkLoggedin())
 {
   ?>
         <li class="nav-item">
-          <a class="nav-link " href="show_completed.php">
+          <a class="nav-link " href="submissions.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Show Completed</span>
+            <span class="nav-link-text ms-1">Submissions</span>
           </a>
         </li>
 
@@ -116,16 +109,16 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 
 ?>
 <?php
-if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"case_admin"))
+if(checkLoggedin())
 {
   ?>
 
         <li class="nav-item">
-          <a class="nav-link " href="add_inprocess.php">
+          <a class="nav-link " href="clickjacking.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-info text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Add Inprocess</span>
+            <span class="nav-link-text ms-1">Clickjacking</span>
           </a>
         </li>
 
@@ -133,192 +126,19 @@ if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["use
 }
         ?>
         <?php
-if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"counsellor"))
+if(checkLoggedin())
 {
   ?>
 
         <li class="nav-item">
-          <a class="nav-link " href="add_user.php">
+          <a class="nav-link " href="sign_out.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-info text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Add Leads</span>
+            <span class="nav-link-text ms-1">Logout</span>
           </a>
         </li>
 
-        <?php
-}
-        ?>
-<?php
-if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts"))
-{
-  ?>
-
-        <li class="nav-item">
-          <a class="nav-link " href="add_completed.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Add Completed</span>
-          </a>
-        </li>
-
-        <?php
-}
-        ?>
-<?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-
-        <li class="nav-item">
-          <a class="nav-link " href="add_admin.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Add Admins</span>
-          </a>
-        </li>
-
-        <?php
-}
-        ?>
-        <?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-
-        <li class="nav-item">
-          <a class="nav-link " href="add_extra_data.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Add Extra Data</span>
-          </a>
-        </li>
-
-        <?php
-}
-        ?>
-<?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-
-        <li class="nav-item">
-          <a class="nav-link " href="show_users.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Admins</span>
-          </a>
-        </li>
-
-        <?php
-}
-        ?>
-<?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-        <li class="nav-item">
-          <a class="nav-link " href="show_consultant.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Consultants</span>
-          </a>
-        </li>
-        <?php
-}
-        ?>
-        <?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-        <li class="nav-item">
-          <a class="nav-link " href="show_country.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Country</span>
-          </a>
-        </li>
-        <?php
-}
-        ?>
-        <?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-        <li class="nav-item">
-          <a class="nav-link " href="show_follow_up_action.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Follow Up Actions</span>
-          </a>
-        </li>
-        <?php
-}
-        ?>
-        <?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-        <li class="nav-item">
-          <a class="nav-link " href="show_inquiry_location.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Inquiry Location</span>
-          </a>
-        </li>
-        <?php
-}
-        ?>
-        <?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-        <li class="nav-item">
-          <a class="nav-link " href="show_outcome.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Outcome</span>
-          </a>
-        </li>
-        <?php
-}
-        ?>
-        <?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-        <li class="nav-item">
-          <a class="nav-link " href="show_priority.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Priority</span>
-          </a>
-        </li>
-        <?php
-}
-        ?>
-        <?php
-if(checkPrivilage($_SESSION["user_type"],"admin"))
-{
-  ?>
-        <li class="nav-item">
-          <a class="nav-link " href="show_source.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Show Source</span>
-          </a>
-        </li>
         <?php
 }
         ?>

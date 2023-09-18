@@ -45,7 +45,7 @@ define("CMS_URL", UPLOAD_URL . "cms/");
 $dbDriver = "mysqli"; 
 $dbPrefix = "";
 $dbHost = "localhost"; 
-$dbName = "askportal";
+$dbName = "website_portal";
 $dbUser = "root";
 $dbPass = ""; 
 
@@ -86,10 +86,8 @@ foreach ($result->result_array() as $row) {
 }
 
 require_once(ADMIN_PATH . "inc/functions.php");
-require_once(ADMIN_PATH . "inc/Bcrypt.php");
 require_once(ADMIN_PATH . "inc/PHPMailerAutoload.php");
 
-$bcrypt = new Bcrypt();
 
 $clubList = array();
 $countryList = array();
