@@ -12,6 +12,7 @@
 
         ?>
     </title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
@@ -32,17 +33,33 @@
     }
     .clickedrow
     {
-      background-color: #EEEEEE;
+        background-color: #EEEEEE;
     }
 
-    .btn:not([class*="btn-outline-"]) {
-    border: 0;
-    margin-left: 20px;
-    
-}
-
-
-
+    .btn:not([class*="btn-outline-"]) 
+    {
+        border: 0;
+        margin-left: 20px;
+    }
+    input.form-control.form-control-sm 
+    {
+        display: inline !important;
+        width: 250px !important;
+    }
+    select.form-control.form-control-sm 
+    {
+        display: inline !important;
+        width: 250px !important;
+    }
+    input.btn.btn-sm.btn-primary.btn-lg.w-40.mt-4.mb-0 
+    {
+        width: 200px !important;
+        display: inline !important;
+    }
+    #space
+    {
+      margin-top:150px !important;
+    }
 
 
     </style>
@@ -149,19 +166,6 @@ if(checkLoggedin())
         
       </ul>
     </div>
-    <!-- <div class="sidenav-footer mx-3 ">
-      <div class="card card-plain shadow-none" id="sidenavCard">
-        <img class="w-50 mx-auto" src="assets/img/illustrations/icon-documentation.svg" alt="sidebar_illustration">
-        <div class="card-body text-center p-3 w-100 pt-0">
-          <div class="docs-info">
-            <h6 class="mb-0">Need help?</h6>
-            <p class="text-xs font-weight-bold mb-0">Please check our docs</p>
-          </div>
-        </div>
-      </div>
-      <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard" target="_blank" class="btn btn-dark btn-sm w-100 mb-3">Documentation</a>
-      <a class="btn btn-primary btn-sm mb-0 w-100" href="https://www.creative-tim.com/product/argon-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-    </div> -->
   </aside>
   <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->

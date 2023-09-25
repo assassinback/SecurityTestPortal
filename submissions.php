@@ -7,8 +7,12 @@ require("header.php");
 
 
 
-
-
+<div id="space"></div>
+<?php
+    
+    create_table();
+    create_data_no_limit();        
+?>
 
 
 

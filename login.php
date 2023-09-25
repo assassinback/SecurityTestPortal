@@ -2,7 +2,6 @@
 $page_name="Login";
 require("login_menu.php");
 require("header.php");
-var_dump($_SESSION);
 if(isset($_SESSION["username"]))
 {
     header("Location:dashboard.php");
@@ -13,10 +12,15 @@ if(isset($_POST["username"]))
     $rows=selectNumRows("admin_info", " username='".$_POST["username"]."' AND password='".$_POST["password"]."'");
     if($rows>0)
     {
-        $_SESSION["user_type"]=$rows["user_type"];
-        $_SESSION["username"]=$rows["username"];
-        $_SESSION["full_name"]=$rows["full_name"];
+        $admin_data=selectData("admin_info", " username='".$_POST["username"]."'");
+        foreach($admin_data as $rows1)
+        {
+            $_SESSION["user_type"]=$rows1["user_type"];
+            $_SESSION["username"]=$rows1["username"];
+            $_SESSION["full_name"]=$rows1["full_name"];
+        }
         header("Location:dashboard.php");
+        
     }
 }
 ?>
@@ -29,5 +33,5 @@ if(isset($_POST["username"]))
 
 
 <?php
-    require("footer.php")
+    require("footer.php");
 ?>

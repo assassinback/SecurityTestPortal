@@ -1,14 +1,17 @@
 <?php
 
 error_reporting(E_ALL);
+
+// ob_end_flush();
+// print ob_get_level ();
 ob_start();
 
 session_start();
 
-date_default_timezone_set('Europe/London');
-// date_default_timezone_set("Asia/Karachi");
+// date_default_timezone_set('Europe/London');
+date_default_timezone_set("Asia/Karachi");
 
-define("SUBDIRECTORY", "ASK_Consultant_Portal/Portal_ASK_Consultant/");
+define("SUBDIRECTORY", "najamportal/");
 
 // define("SITE_URL", "https://77.68.4.68/plesk-site-preview/www.pitchrmt.com/http/77.68.4.68/" . SUBDIRECTORY);
 // define("ADMIN_URL", "https://77.68.4.68/plesk-site-preview/www.pitchrmt.com/http/77.68.4.68/" . SUBDIRECTORY . "admin/");
@@ -86,8 +89,10 @@ foreach ($result->result_array() as $row) {
 }
 
 require_once(ADMIN_PATH . "inc/functions.php");
+require_once(ADMIN_PATH . "inc/Bcrypt.php");
 require_once(ADMIN_PATH . "inc/PHPMailerAutoload.php");
 
+$bcrypt = new Bcrypt();
 
 $clubList = array();
 $countryList = array();
