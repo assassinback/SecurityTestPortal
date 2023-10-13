@@ -360,6 +360,7 @@ function create_fields()
     $bugs=selectData("bug_info");
     
     ?>
+
     <form id="search_form" method="POST" style="margin-top:50px !important;">
         <input class="form-control form-control-sm" type="text" name="website_link" placeholder="Enter Website Domain">
         <input class="form-control form-control-sm" type="text" name="email" placeholder="Enter Email">
@@ -418,7 +419,7 @@ function create_data()
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['email']."</td>";
         echo "</tr>";
     }
-    echo "</tbody></table></div></div></div></div></div></div>";
+    echo "</tbody></table></div>";
 }
 function create_data_no_limit()
 {
