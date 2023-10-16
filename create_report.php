@@ -6,6 +6,10 @@ if(isset($_POST)) {
     $email=$_POST["email"];
     $Subject=$_POST["Subject"];
     $type=$_POST["type"];
+    if($type=="Click Jacking" && isset($_POST["extra_data"]))
+    {
+        $extra_data=$_POST["extra_data"];
+    }
     $site = parse_url($site, PHP_URL_HOST);
     $row=selectData("bug_info"," bug_name='$type'");
     if($type=="none")
@@ -29,6 +33,11 @@ if(isset($_POST)) {
                 $_SESSION["reports"]=$type;
             }
             $rows["bug_report"]=str_replace("[website_name]",$site,$rows["bug_report"]);
+            if($extra_data!="")
+            {
+                $rows["bug_report"]=str_replace("[extra_data]",$extra_data,$rows["bug_report"]);
+            }
+            
             echo json_encode($rows["bug_report"]);
         }
     }

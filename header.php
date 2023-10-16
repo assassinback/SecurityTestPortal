@@ -13,7 +13,8 @@
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
                 
-                <span class="d-sm-inline d-none">Saturday,March,18,2023</span>
+                <span class="d-sm-inline d-none" style="color:black">
+                <?php  echo date("d/m/Y");  ?>  </span>
                  
               </a>
               <ul class="navbar-nav-sun  justify-content-end">

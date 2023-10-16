@@ -355,86 +355,159 @@ function checkLoggedin()
     return false;
 }
 
-function create_fields()
-{
-    $bugs=selectData("bug_info");
-    
-    ?>
 
-    <form id="search_form" method="POST" style="margin-top:50px !important;">
-        <input class="form-control form-control-sm" type="text" name="website_link" placeholder="Enter Website Domain">
-        <input class="form-control form-control-sm" type="text" name="email" placeholder="Enter Email">
-        <input class="form-control form-control-sm" type="text" name="Subject" placeholder="Subject" value="Vulnerability Detected, Remediation Required">
-        <select name="type" class="form-control form-control-sm">
-            
-            <option value="none" selected="selected">Select Bug</option>
-
-            <?php
-                foreach($bugs as $rows)
-                {
-                    ?>
-                        <option value="<?php echo $rows["bug_name"];  ?>"><?php echo $rows["bug_name"];  ?></option>
-                    <?php
-                }
-            ?>
-        </select><br><br>
-        <input class="btn btn-sm btn-primary btn-lg w-40 mt-4 mb-0" type="submit" id="check_website" name="check_website" value="Check Website">
-        <input class="btn btn-sm btn-primary btn-lg w-40 mt-4 mb-0" type="submit" id="generate_report" name="generate_report" value="Generate Report">
-        <input class="btn btn-sm btn-primary btn-lg w-40 mt-4 mb-0" type="submit" id="copy_report" name="copy_report" value="Copy Report">
-        <input class="btn btn-sm btn-primary btn-lg w-40 mt-4 mb-0" type="submit" id="submit_report" name="submit_report" value="Submit Report"><br><br>
-        <label class='text-center text-uppercase text-xs font-weight-bolder opacity-10' id="search_result"></label>
-
-        <textarea id="report_info" name="report_info" rows="20" cols="125"></textarea>
-        <?php
-            create_table();
-            create_data();
-            
-        ?>
-    </form>
-    <?php
-}
 function create_table()
 {
-    echo "<div class='card-body px-0 pt-0 pb-2'>
-    <div id='table-responsive' class='table-responsive p-0'><table class='table align-items-center mb-0'>";
-        echo "<thead><tr>";
-    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>S.No</th>";
-    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Date</th>";
-    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Website</th>";
-    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Bug</th>";
-    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Email</th>";
+    echo "<table class='table align-items-center' id='export'>";
+    echo "<thead><tr>";
+    echo "<th>S.No</th>";
+    echo "<th>Date</th>";
+    echo "<th>Website</th>";
+    echo "<th>Bug</th>";
+    echo "<th>Email</th>";
     echo "</tr></thead>";
 }
 function create_data()
 {
     $sites=selectData("website_info","id ORDER BY id DESC LIMIT 50");
-    echo "<tbody id='tbody-zia'>";
+    echo "<tbody id='table_of_items'>";
     foreach($sites as $site)
     {
         echo "</tr>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['id']."</td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['date']."</td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['website']."</td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['bug']."</td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['email']."</td>";
+        echo "<td>".$site['id']."</td>";
+        echo "<td>".$site['date']."</td>";
+        echo "<td>".$site['website']."</td>";
+        echo "<td>".$site['bug']."</td>";
+        echo "<td>".$site['email']."</td>";
         echo "</tr>";
     }
-    echo "</tbody></table></div>";
+    echo "</tbody></table>";
 }
 function create_data_no_limit()
 {
     $sites=selectData("website_info");
-    echo "<tbody id='tbody-zia'>";
+    echo "<tbody>";
     foreach($sites as $site)
     {
         echo "</tr>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['id']."</td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['date']."</td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['website']."</td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['bug']."</td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$site['email']."</td>";
+        echo "<td>".$site['id']."</td>";
+        echo "<td>".$site['date']."</td>";
+        echo "<td>".$site['website']."</td>";
+        echo "<td>".$site['bug']."</td>";
+        echo "<td>".$site['email']."</td>";
         echo "</tr>";
     }
-    echo "</tbody></table></div></div></div></div></div></div>";
+    echo "</tbody></table>";
+}
+
+function create_fields_new()
+{
+    $bugs=selectData("bug_info");
+    ?>
+    <form id="search_form" method="POST" style="margin-top:50px !important;">
+        <div class="card z-index-2 h-70">
+            <div class="card-body p-3">
+
+              
+              <div class="row align-items-center">
+                <div class="col-lg-8">
+                  <div class="row">
+
+                    <div class="col-lg-10 mb-0 pb-0">
+                      <input type="text" class="form-control" id="inputAddress" name="website_link" placeholder="Enter Website Link">
+                    </div>
+                    <div class="col-lg-2 mb-0 p-0">
+                      <button type="submit" class="btn btn-primary5_5" id="check_website" name="check_website" value="Check Website"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#000000}</style><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></button>
+                      
+                    </div>
+                  </div>
+                  
+                  <form class="row g-4">
+                    
+                      
+                      
+                    <div class="col-12">
+                      
+                      <input type="text" class="form-control" id="inputAddress" placeholder="Enter Login Link OR Email">
+                    </div>
+        
+        
+                    <div class="col-12">
+                      
+                      <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
+                    </div>
+                    <div class="col-12">
+                      
+                      <input type="sub" class="form-control" id="sub4" placeholder="Subject" name="Subject" value="Vulnerability Detected, Remediation Required">
+                    </div>
+                    <div class="col-12">
+                      <!-- [extra_data] -->
+                        <input class="form-control form-control-sm" type="text" name="extra_data" placeholder="Extra Data(Iframe src)" value="">
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary1" id="generate_report" name="generate_report" value="Generate Report">Generate Report</button>
+                    </div>
+                    <!-- <div class="col-md-1">
+                      
+                      <select id="inputState" class="form-select">
+                        <option selected>Bug...</option>
+                        <option>...</option>
+                      </select>
+                      
+                    </div> -->
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary1" id="submit_report" name="submit_report" value="Submit Report">Send Report</button>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary1" id="copy_report" name="copy_report" value="Copy Report">Copy Report</button>
+                    </div>
+                   
+                  </form>
+                 
+  
+                </div>
+                
+
+                <!-- radio buttion start -->
+                <div class="col-lg-4">
+                
+                        <?php
+                            foreach($bugs as $rows)
+                            {
+                                ?>
+                                    <div class="btn-group btn-group-toggle col-10" data-toggle="buttons">
+
+<label class="btn btn-primary8">
+                                    <input type="radio" name="type" value="<?php echo $rows["bug_name"]; ?>" id="option2" autocomplete="off"> <?php echo $rows["bug_name"]; ?>
+                                    </label></div>
+                                <?php
+                            }
+                        ?>
+                
+                     
+
+              
+
+                <!-- radio buttion end -->
+              
+
+              
+                  
+                </div>
+              </div>
+    
+             
+              <div class="col-md-12 text-center">
+                      
+                <p id="check_tested"> This site is tested</p>
+              </div>
+            
+          </div>
+          
+          
+         </div>
+</form>
+    <?php
+
 }
 ?>
