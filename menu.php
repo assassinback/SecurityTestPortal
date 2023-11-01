@@ -24,11 +24,15 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+  <link id="pagestyle" href="assets/css/argon-dashboard.css" rel="stylesheet" />
+  <link id="pagestyle" href="assets/css/style.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <style>
     textarea#search_result {
     border: transparent;
+}
+button#copy_email {
+    background-color: black !important;
 }
   </style>
   <script src="csvExport.js"></script>

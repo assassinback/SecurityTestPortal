@@ -26919,6 +26919,25 @@ pre[class*="language-"] {
   width: 11px;
 }
 
+button#submit_report {
+  background-color: black;
+  
+    color: white;
+}
+button#copy_report {
+  background-color: black;
+  
+    color: white;
+}
+button#generate_report {
+  background-color: black;
+  
+    color: white;
+}
+
+button#check_website {
+  background-color: #cb6af6 !important;
+}
 /* MS supports */
 @supports (-ms-overflow-style: none) {
   .ps {
@@ -26931,6 +26950,12 @@ pre[class*="language-"] {
   .ps {
     overflow: auto !important;
   }
+}
+button#check_website {
+  background-color: violet !important;
+}
+.row {
+  background-color: antiquewhite !important;
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */

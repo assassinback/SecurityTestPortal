@@ -26,14 +26,18 @@ if(isset($_POST)) {
         {
             if(isset($_SESSION["reports"]))
             {
-                $_SESSION["reports"].=", ".$type;
+                if(!str_contains($_SESSION["reports"], $type))
+                {
+                    $_SESSION["reports"].=", ".$type;
+                }
+                
             }
             else
             {
                 $_SESSION["reports"]=$type;
             }
             $rows["bug_report"]=str_replace("[website_name]",$site,$rows["bug_report"]);
-            if($extra_data!="")
+            if(isset($extra_data))
             {
                 $rows["bug_report"]=str_replace("[extra_data]",$extra_data,$rows["bug_report"]);
             }

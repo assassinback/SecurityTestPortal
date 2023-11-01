@@ -6,6 +6,7 @@
         
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link id="pagestyle" href="assets/css/argon-dashboard.css" rel="stylesheet" />
         <?php
         $page_name="PHP Mailer";
         require("menu.php");
@@ -67,10 +68,7 @@
             <center><img src="assets/img/logos/cropped-Group-18-e1690326077285.png" alt="NJ kHAN" ></center>
         </div>
 
-            <!-- <h1 style="color: rgb(255, 0, 0); font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;">PHP Mailer</h1>     -->
-            <h3 style="color: darkgreen; font-family:monospace; text-align: center;">
-This is a simple PHP E-Mailer, please run this on a webserver, apache is 
-not the recommended for this.</h3>
+            
             <br>
         </b>
 	

@@ -26,14 +26,9 @@ require("header.php");
             <div class="card z-index-2 h-70">
               <div class="card-body p-3">
                 
-                <textarea rows="8" cols="52" id="search_result">Hello,
+                <textarea rows="10" cols="68" id="search_result">
 
-                  This is Neiv, I am a web security researcher and I was surfing the internet and found your website asdasdasdasd and as I was checking your website
-                   I found a vulnerability on your website which I would very much like to disclose to you responsibly so that you can fix that vulnerability
-                    and be safe from cyber attacks that could hurt you and your client base. Please provide your tech support email so that I can send the complete 
-                    vulnerability report along with possible solutions.
-
-                  Thank you</textarea>
+                 </textarea>
 
 
           </div>
@@ -59,7 +54,13 @@ require("header.php");
                   
                     
                   <div class="col-md-8 my-auto">
-                    <button type="submit" id="export_to_csv" class="btn btn-primary5">Download Reports</button>
+                    <style>.col-md-8.my-auto {
+                        display: flex;
+                        flex-direction: row;
+                        align-content: flex-end;
+                        justify-content: flex-end;
+                    }</style>
+                    <button type="submit" id="copy_all_reports" class="btn btn-primary5">Copy Reports</button>
                   </div>
                 </div>
               </div>
@@ -73,9 +74,14 @@ require("header.php");
               
     
         </div>
-        <div class="col-md-12 text-right px-3">
-                
-          <!-- <button type="submit" class="btn btn-primary6" id="clear_table">Clear All Report</button> -->
+        <div class="col-md-12 text-right px-3"> 
+             <style>.col-md-12.text-right.px-3 {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                margin-left: -15px;
+            }</style>
+         <button type="submit" class="btn btn-primary6" id="clear_table">Clear All Report</button> 
         </div>
       </div></div>
       </div>
@@ -89,11 +95,11 @@ require("header.php");
 
 <script>
   // $("#table_of_items tr").remove(); 
-    document.getElementById("export_to_csv").onclick=function()
-    {
-      $('table').csvExport();
-    }
-    var reports="";
+    // document.getElementById("export_to_csv").onclick=function()
+    // {
+    //   $('table').csvExport();
+    // }
+    // var reports="";
     function removeHttp(url) {
         return url.replace(/^https?:\/\//, '');
     }
@@ -111,6 +117,8 @@ require("header.php");
         success: function (data) {
           
             $("#check_tested").html(data);
+            
+            setTimeout(function() { $("#check_tested").html(""); }, 5000);
         },
         error: function(xhr, status, error) {
             var err = JSON.parse(xhr.responseText);
@@ -141,6 +149,55 @@ require("header.php");
         });
     
     });
+    $('#clear_table').click(function (e) {
+        
+        e.preventDefault();
+        
+        // var url = $(this).attr("action");
+        var url="clear_table.php";
+        $.ajax({
+        type: 'POST',
+        url: url,
+        data: $('#search_form').serialize(),
+        dataType : 'json', 
+        success: function (data) {
+          // console.log(data);
+          $("#check_tested").html(data);
+          document.getElementById("table_of_items").innerHTML="";
+          setTimeout(function() { $("#check_tested").html(""); }, 5000);
+
+        },
+        error: function(xhr, status, error) {
+            var err = JSON.parse(xhr.responseText);
+            alert(err.Message);
+        }
+        });
+    
+    });
+    $('#copy_email').click(function (e) {
+        
+        e.preventDefault();
+        
+        var copyText = document.getElementById("inputEmail4");
+
+        copyText.select();
+        // copyText.setSelectionRange(0, 99999);
+
+        navigator.clipboard.writeText(copyText.value);
+    
+    });
+    $('#copy').click(function (e) {
+        
+        e.preventDefault();
+        
+        var copyText = document.getElementById("sub4");
+
+        copyText.select();
+        // copyText.setSelectionRange(0, 99999);
+
+        navigator.clipboard.writeText(copyText.value);
+    
+    });
     $('#copy_report').click(function (e) {
         
         e.preventDefault();
@@ -165,7 +222,10 @@ require("header.php");
         data: $('#search_form').serialize(),
         dataType : 'json', 
         success: function (data) {
-            $("#check_tested").html(data);
+            data=Object.entries(data);
+            $("#check_tested").html("Data Inserted");
+            $("#check_tested").html(data[0][1]);
+            document.getElementById("table_of_items").innerHTML+="<tr><td>"+data[6][1]+"</td><td>"+data[0][1]+"</td><td>"+data[1][1]+"</td><td>"+data[3][1]+"</td><td>"+data[2][1]+"</td></tr>";
             $("#search_form")[0].reset();
             // document.getElementById('tbody-zia').remove();
         },
@@ -176,10 +236,39 @@ require("header.php");
         });
     
     });
+    function selectElementContents(el) {
+        var body = document.body, range, sel;
+        if (document.createRange && window.getSelection) {
+            range = document.createRange();
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            try {
+                range.selectNodeContents(el);
+                sel.addRange(range);
+            } catch (e) {
+                range.selectNode(el);
+                sel.addRange(range);
+            }
+            document.execCommand("copy");
+
+        } else if (body.createTextRange) {
+            range = body.createTextRange();
+            range.moveToElementText(el);
+            range.select();
+            range.execCommand("Copy");
+        }
+    }
+    $("#copy_all_reports").click(function (e) {
+    
+      selectElementContents(document.getElementById('export'));
+    });
+    
 </script>
 
 
 
+
+    
 
 
 
@@ -187,3 +276,28 @@ require("header.php");
 
 require("footer.php");
 ?>
+
+<style>
+
+button#check_website {
+    background-color: #bb92ea !important;
+}
+button#copy {
+    background-color: black;
+}
+button#copy_report {
+    /* padding: 0 20px; */
+    padding-left: 42px !important;
+    padding-right: 42px !important;
+}
+.sidenav .navbar-brand {
+    
+    display: flex;
+    justify-content: center;
+}
+
+
+.w-60 {
+    width: 100% !important;
+}
+</style>

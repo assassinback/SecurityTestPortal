@@ -20,7 +20,7 @@ require("header.php");
               <div class="card-body p-3">
 <?php
     
-    create_table();
+    create_table_no_limit();
     create_data_no_limit();        
 ?>
 

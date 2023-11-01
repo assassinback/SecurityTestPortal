@@ -292,6 +292,19 @@ function selectData($table="",$where="", $data=array()) {
     $row=$update->result_array();
     return $row;
 }
+function last_insert_id($table="")
+{
+    global $db, $dbPrefix, $list;
+    
+    $sql = "SELECT MAX(ID) as max FROM $table";
+    $query=$db->query($sql);
+    $row=$query->result_array();
+    foreach($row as $rows)
+    {
+        return $rows["max"]; 
+    }
+    return 0;
+}
 function selectNumRows($table="",$where="", $data=array()) {
     global $db, $dbPrefix, $list;
     
@@ -369,11 +382,12 @@ function create_table()
 }
 function create_data()
 {
-    $sites=selectData("website_info","id ORDER BY id DESC LIMIT 50");
+    $username=$_SESSION["username"];
+    $sites=selectData("website_info","insert_admin='$username' AND status='completed' ORDER BY id LIMIT 50");
     echo "<tbody id='table_of_items'>";
     foreach($sites as $site)
     {
-        echo "</tr>";
+        echo "<tr>";
         echo "<td>".$site['id']."</td>";
         echo "<td>".$site['date']."</td>";
         echo "<td>".$site['website']."</td>";
@@ -383,18 +397,31 @@ function create_data()
     }
     echo "</tbody></table>";
 }
+function create_table_no_limit()
+{
+    echo "<table class='table align-items-center' id='export'>";
+    echo "<thead><tr>";
+    echo "<th>S.No</th>";
+    echo "<th>Date</th>";
+    echo "<th>Website</th>";
+    echo "<th>Bug</th>";
+    echo "<th>Email</th>";
+    echo "<th>Insert Admin</th>";
+    echo "</tr></thead>";
+}
 function create_data_no_limit()
 {
-    $sites=selectData("website_info","id ORDER BY id DESC");
+    $sites=selectData("website_info","id ORDER BY id");
     echo "<tbody>";
     foreach($sites as $site)
     {
-        echo "</tr>";
+        echo "<tr>";
         echo "<td>".$site['id']."</td>";
         echo "<td>".$site['date']."</td>";
         echo "<td>".$site['website']."</td>";
         echo "<td>".$site['bug']."</td>";
         echo "<td>".$site['email']."</td>";
+        echo "<td>".$site['insert_admin']."</td>";
         echo "</tr>";
     }
     echo "</tbody></table>";
@@ -426,27 +453,49 @@ function create_fields_new()
                     
                       
                       
-                    <div class="col-12">
+                    <div class="col-12 mb-3">
                       
-                      <input type="text" class="form-control" id="inputAddress" placeholder="Enter Login Link OR Email">
+                      <input type="text" name="extra_data" class="form-control" id="inputAddress" placeholder="Enter Login Link OR Email">
                     </div>
         
-        
-                    <div class="col-12">
-                      
+                    <div class="row mb-0">
+                    <div class="col-lg-10 mb-0 pb-0">
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">                    </div>
+                    <div class="col-lg-1 mb-0 p-0">
+                      <button type="submit" class="btn btn-primary5_5" id="copy_email" name="copy_email" value="Check Website"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M384 336H192c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16l140.1 0L400 115.9V320c0 8.8-7.2 16-16 16zM192 384H384c35.3 0 64-28.7 64-64V115.9c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1H192c-35.3 0-64 28.7-64 64V320c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H256c35.3 0 64-28.7 64-64V416H272v32c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192c0-8.8 7.2-16 16-16H96V128H64z"/></svg></button>
+                    </div></div>
+
+                    <!-- <div class="col-12">
+                    
                       <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
-                    </div>
-                    <div class="col-12">
                       
+                    </div> -->
+                    
+
+                    <div class="row">
+                    <div class="col-lg-10 mb-0 pb-0">
+                    <input type="sub" class="form-control" id="sub4" placeholder="Subject" name="Subject" value="Vulnerability Detected, Remediation Required">
+                    </div>
+                    <div class="col-lg-1 mb-0 p-0">
+                      <button type="submit" class="btn btn-primary5_5" id="copy" name="copy_link" value="Check Website"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M384 336H192c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16l140.1 0L400 115.9V320c0 8.8-7.2 16-16 16zM192 384H384c35.3 0 64-28.7 64-64V115.9c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1H192c-35.3 0-64 28.7-64 64V320c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H256c35.3 0 64-28.7 64-64V416H272v32c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192c0-8.8 7.2-16 16-16H96V128H64z"/></svg></button>
+                    </div></div>
+                    <!-- <div class="col-12">
+                    ..................
                       <input type="sub" class="form-control" id="sub4" placeholder="Subject" name="Subject" value="Vulnerability Detected, Remediation Required">
-                    </div>
-                    <div class="col-12">
-                      <!-- [extra_data] -->
+                    </div> -->
+
+                    <!-- <div class="col-12">
+                      
                         <input class="form-control form-control-sm" type="text" name="extra_data" placeholder="Extra Data(Iframe src)" value="">
+                    </div> -->
+                    <div class="col-12" >
+                      
+                    <button type="submit" class="btn btn-primary1" id="generate_report" name="generate_report" value="Generate Report">Generate Report</button>
+                    <button type="submit" class="btn btn-primary1 px-4" id="copy_report" name="copy_report" value="Copy Report" ><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M384 336H192c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16l140.1 0L400 115.9V320c0 8.8-7.2 16-16 16zM192 384H384c35.3 0 64-28.7 64-64V115.9c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1H192c-35.3 0-64 28.7-64 64V320c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H256c35.3 0 64-28.7 64-64V416H272v32c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192c0-8.8 7.2-16 16-16H96V128H64z"/></svg></button>
+                    <button type="submit" class="btn btn-primary1" id="submit_report" name="submit_report" value="Submit Report">Send Report</button>
+
                     </div>
-                    <div class="col-12">
-                      <button type="submit" class="btn btn-primary1" id="generate_report" name="generate_report" value="Generate Report">Generate Report</button>
-                    </div>
+                    
                     <!-- <div class="col-md-1">
                       
                       <select id="inputState" class="form-select">
@@ -455,12 +504,12 @@ function create_fields_new()
                       </select>
                       
                     </div> -->
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                       <button type="submit" class="btn btn-primary1" id="submit_report" name="submit_report" value="Submit Report">Send Report</button>
-                    </div>
-                    <div class="col-12">
+                    </div> -->
+                    <!-- <div class="col-12">
                       <button type="submit" class="btn btn-primary1" id="copy_report" name="copy_report" value="Copy Report">Copy Report</button>
-                    </div>
+                    </div> -->
                    
                   </form>
                  
@@ -499,7 +548,7 @@ function create_fields_new()
              
               <div class="col-md-12 text-center">
                       
-                <p id="check_tested"> This site is tested</p>
+                <p id="check_tested"> </p>
               </div>
             
           </div>

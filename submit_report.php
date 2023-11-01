@@ -10,9 +10,12 @@ if(isset($_POST)) {
     $new_data["email"]=$_POST["email"];
     $new_data["bug"]=$_SESSION["reports"];
     $new_data["status"]="completed";
+    $new_data["insert_admin"]=$_SESSION["username"];
     insertData("website_info",$new_data);
     unset($_SESSION['reports']);
-    echo json_encode("Data Inserted");
+    $lastid=last_insert_id("website_info");
+    $new_data["id"]=$lastid;
+    echo json_encode($new_data);
     // echo json_encode("123");
     
 }
