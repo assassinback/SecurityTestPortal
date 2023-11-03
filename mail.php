@@ -24,7 +24,7 @@ if ( isset( $_POST['mail_from'] ) ) {
     
     for ($mail = 1; $mail <= $count; $mail++) {
         mail($mail_to, $subject, $message, $headers);
-        echo json_encode("Email Sent");
+        echo '<span style="color: blueviolet;">Email Sent</span>';
         
     }
     

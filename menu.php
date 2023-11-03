@@ -1,8 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
     require("config.php");
+    if(!isset($_SESSION["username"]))
+    {
+        header("Location: index.php");
+    }
     ?>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   
   <meta charset="utf-8" />

@@ -3,6 +3,7 @@ if(isset($_POST)) {
     require("config.php");
     // echo json_encode($_POST);
     $site=$_POST["website_link"];
+    $_SESSION["count"]=1;
     $site = parse_url($site, PHP_URL_HOST);
 
     $new_data["status"]="cleared";

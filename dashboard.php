@@ -222,12 +222,21 @@ require("header.php");
         data: $('#search_form').serialize(),
         dataType : 'json', 
         success: function (data) {
-            data=Object.entries(data);
-            $("#check_tested").html("Data Inserted");
-            $("#check_tested").html(data[0][1]);
-            document.getElementById("table_of_items").innerHTML+="<tr><td>"+data[6][1]+"</td><td>"+data[0][1]+"</td><td>"+data[1][1]+"</td><td>"+data[3][1]+"</td><td>"+data[2][1]+"</td></tr>";
-            $("#search_form")[0].reset();
-            // document.getElementById('tbody-zia').remove();
+            if(data=="Please Enter Website Link")
+            {
+                $("#check_tested").html(data);    
+            }
+            else
+            {
+                data=Object.entries(data);
+                $("#check_tested").html("Data Inserted");
+                // $("#check_tested").html(data[0][1]);
+                document.getElementById("table_of_items").innerHTML+="<tr><td>"+data[6][1]+"</td><td>"+data[0][1]+"</td><td>"+data[1][1]+"</td><td>"+data[3][1]+"</td><td>"+data[2][1]+"</td></tr>";
+                $("#search_form")[0].reset();
+                $("#search_result").html("");
+                // document.getElementById('tbody-zia').remove();    
+            }
+            
         },
         error: function(xhr, status, error) {
             var err = JSON.parse(xhr.responseText);

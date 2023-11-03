@@ -6,7 +6,7 @@ if(isset($_POST)) {
     $email=$_POST["email"];
     $Subject=$_POST["Subject"];
     $type=$_POST["type"];
-    if($type=="Click Jacking" && isset($_POST["extra_data"]))
+    if(($type=="Click Jacking" || $type=="DMARC RED" || $type=="DMARC YELLOW") && isset($_POST["extra_data"]))
     {
         $extra_data=$_POST["extra_data"];
     }
@@ -14,7 +14,7 @@ if(isset($_POST)) {
     $row=selectData("bug_info"," bug_name='$type'");
     if($type=="none")
     {
-        echo json_encode("Please Select A Bug");
+        echo json_encode($_POST["type"]);
     }
     else if($email=="")
     {
@@ -37,6 +37,7 @@ if(isset($_POST)) {
                 $_SESSION["reports"]=$type;
             }
             $rows["bug_report"]=str_replace("[website_name]",$site,$rows["bug_report"]);
+            $rows["bug_report"]=str_replace("[full_name]",$_SESSION["full_name"],$rows["bug_report"]);
             if(isset($extra_data))
             {
                 $rows["bug_report"]=str_replace("[extra_data]",$extra_data,$rows["bug_report"]);

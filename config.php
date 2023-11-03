@@ -5,13 +5,11 @@ error_reporting(E_ALL);
 // ob_end_flush();
 // print ob_get_level ();
 ob_start();
-
 session_start();
-
 // date_default_timezone_set('Europe/London');
 date_default_timezone_set("Asia/Karachi");
 
-define("SUBDIRECTORY", "najamportal/");
+define("SUBDIRECTORY", "/");
 
 // define("SITE_URL", "https://77.68.4.68/plesk-site-preview/www.pitchrmt.com/http/77.68.4.68/" . SUBDIRECTORY);
 // define("ADMIN_URL", "https://77.68.4.68/plesk-site-preview/www.pitchrmt.com/http/77.68.4.68/" . SUBDIRECTORY . "admin/");
@@ -48,9 +46,9 @@ define("CMS_URL", UPLOAD_URL . "cms/");
 $dbDriver = "mysqli"; 
 $dbPrefix = "";
 $dbHost = "localhost"; 
-$dbName = "website_portal";
-$dbUser = "root";
-$dbPass = ""; 
+$dbName = "secure_portal";
+$dbUser = "secure_portal";
+$dbPass = "vc_H.}ivl?59"; 
 
 @include (ADMIN_PATH . "/inc/database/DB_driver.php");
 @include (ADMIN_PATH . "/inc/database/DB_query_builder.php");

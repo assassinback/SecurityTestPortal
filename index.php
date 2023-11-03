@@ -8,7 +8,7 @@ if(isset($_SESSION["username"]))
 }
 if(isset($_POST["username"]))
 {
-    echo "here";
+    echo "Wrong Password";
     $rows=selectNumRows("admin_info", " username='".$_POST["username"]."' AND password='".$_POST["password"]."'");
     if($rows>0)
     {
@@ -19,8 +19,8 @@ if(isset($_POST["username"]))
             $_SESSION["username"]=$rows1["username"];
             $_SESSION["full_name"]=$rows1["full_name"];
         }
-        header("Location:dashboard.php");
-        
+        ?>
+        <?php header("Location: dashboard.php");?><?php
     }
 }
 ?>

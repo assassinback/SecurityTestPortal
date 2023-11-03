@@ -1,0 +1,112 @@
+body {
+    background-color: rgb(17, 17, 17);
+}
+.text {
+    border-style: ridge;
+    color: rgb(255, 255, 255);
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    text-size-adjust: 20px;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* CSS from Figma */
+
+.input1
+{
+width: 440px;
+height: 48px;
+flex-shrink: 0;
+text-emphasis-color: white;
+border-radius: 20px;
+background: #2c2c2c;
+border: none;
+text-align: -webkit-center;
+border-radius: 16px;
+}
+.input2
+{
+width: 440px;
+height: 230px;
+flex-shrink: 0;
+border-radius: 24px;
+background: #2c2c2c;
+padding: 10px;
+border: none;
+}
+
+.input3
+{
+width: 440px;
+height: 48px;
+flex-shrink: 0;
+border-radius: 100px;
+background: #2c2c2c;
+position:relative; left:-500px; top:-100px;
+display:none;
+}
+
+.input4
+{
+width: 440px;
+height: 48px;
+flex-shrink: 0;
+border-radius: 100px;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+}
+
+.input4:hover
+{
+width: 440px;
+height: 48px;
+flex-shrink: 0;
+border-radius: 100px;
+background: rgb(137, 64, 253);
+color: rgb(255, 255, 255);
+border: 1px solid black;
+transition-duration: 0.4s;
+transform: scale(1.1);
+}
+
+select.input1 {
+    text-align: -webkit-center;
+   
+    border-radius: 16px;
+}
+
+.email {background-color: rgb(254, 255, 254);}
+
+.send_mail {background-color: blue;}
+
+.mail_from {background-color: white;}
+
+.mail_to {background-color: seagreen;}
+
+.subject {background-color: seagreen;}
+
+.message {background-color: seagreen}
+
+.submit {background-color: blue;}
+
+.count {background-color: seagreen;}
+
+  input, select, textarea{
+    color: #ffffff;
+}
+img {
+    /* height: fit-content; */
+    /* width: fit-content; */
+    height: 70px;
+}
+
+/* Display None */
+
+
+textarea.input2 {
+    display: none;
+}

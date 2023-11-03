@@ -383,17 +383,20 @@ function create_table()
 function create_data()
 {
     $username=$_SESSION["username"];
-    $sites=selectData("website_info","insert_admin='$username' AND status='completed' ORDER BY id LIMIT 50");
+    $_SESSION["count"]=1;
+    $sites=selectData("website_info","insert_admin='$username' AND status='completed' ORDER BY id LIMIT 200");
     echo "<tbody id='table_of_items'>";
     foreach($sites as $site)
     {
         echo "<tr>";
-        echo "<td>".$site['id']."</td>";
+        // echo "<td>".$site['id']."</td>";
+        echo "<td>".$_SESSION["count"]."</td>";
         echo "<td>".$site['date']."</td>";
         echo "<td>".$site['website']."</td>";
         echo "<td>".$site['bug']."</td>";
         echo "<td>".$site['email']."</td>";
         echo "</tr>";
+        $_SESSION["count"]=$_SESSION["count"];    
     }
     echo "</tbody></table>";
 }

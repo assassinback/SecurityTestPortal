@@ -1,3 +1,6 @@
+<?php
+    require("config.php");
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,9 +22,7 @@
     <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="assets/css/argon-dashboard.css" rel="stylesheet" />
-    <?php
-    require("config.php");
-    ?>
+    
     <style>
     /* table, th, td {
         border: 1px solid black;
