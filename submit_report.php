@@ -4,6 +4,10 @@ if(isset($_POST)) {
     // echo json_encode($_POST);
     $site=$_POST["website_link"];
     $site = parse_url($site, PHP_URL_HOST);
+    if($site==null)
+    {
+        $site=$_POST["website_link"];
+    }
     if(!isset($_POST["website_link"]) || $_POST["website_link"]==null || $_POST["website_link"]=="")
     {
         echo json_encode("Please Enter Website Link");    
