@@ -46,7 +46,7 @@ require("header.php");
                 <div class="row">
                   <div class="col-md-4">
                     <h4 color="black">Reports</h4>
-                    <p color="black">50 Total</p>
+                    <p color="black"> 200 Your Daily Target </p>
                   </div>
                   <!-- <div class="col-md-2 my-auto">
                     <button type="submit" class="btn btn-primary5">Select All Report</button>
@@ -222,7 +222,7 @@ require("header.php");
         data: $('#search_form').serialize(),
         dataType : 'json', 
         success: function (data) {
-            if(data=="Please Enter Website Link")
+            if(data=="Please Enter Website Link" || data=="This Website is Already Inserted" || data=="Please Select a Bug")
             {
                 $("#check_tested").html(data);    
             }
@@ -288,9 +288,7 @@ require("footer.php");
 
 <style>
 
-button#check_website {
-    background-color: #bb92ea !important;
-}
+
 button#copy {
     background-color: black;
 }

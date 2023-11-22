@@ -5,8 +5,30 @@
         
         <div class="container-fluid-nav">
         <div class="input-group">
-          <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" placeholder="Search">
+            
+          <!--<span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+          <!--<input type="text" class="form-control" placeholder="Search">-->
+          
+          <?php
+              if($_SESSION["user_type"]=="admin")
+              {
+                  ?>
+                    <form method="POST" action="submissions.php">
+                        <span class="input-group-text text-body"><button type="submit" name="search_btn"><i class="fas fa-search" aria-hidden="true"></button></i></span>
+                        <input type="text" class="form-control" placeholder="Search" name="search">
+                    
+                    </form>
+                  <?php
+              }
+              else
+              {
+                ?>
+                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" placeholder="Search">
+                <?php
+              }
+          ?>
+          
         </div></div>
        
           <ul class="navbar-nav  justify-content-end">

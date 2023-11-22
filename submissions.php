@@ -19,9 +19,18 @@ require("header.php");
             <div class="card z-index-2 h-70" style="min-width: 2100px !important;">
               <div class="card-body p-3">
 <?php
-    
     create_table_no_limit();
-    create_data_no_limit();        
+    if(!isset($_POST["search"]))
+    {
+        create_data_no_limit();
+    }
+    else
+    {
+        // echo "test123".$_POST["search"];
+            create_search_data($_POST["search"]);
+    }
+    
+    
 ?>
 
 </div>

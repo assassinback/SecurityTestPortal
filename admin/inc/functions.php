@@ -396,7 +396,7 @@ function create_data()
         echo "<td>".$site['bug']."</td>";
         echo "<td>".$site['email']."</td>";
         echo "</tr>";
-        $_SESSION["count"]=$_SESSION["count"];    
+        $_SESSION["count"]=$_SESSION["count"]+1;    
     }
     echo "</tbody></table>";
 }
@@ -414,7 +414,26 @@ function create_table_no_limit()
 }
 function create_data_no_limit()
 {
-    $sites=selectData("website_info","id ORDER BY id");
+    $sites=selectData("website_info","id ORDER BY id DESC LIMIT 500");
+    echo "<tbody>";
+    foreach($sites as $site)
+    {
+        echo "<tr>";
+        echo "<td>".$site['id']."</td>";
+        echo "<td>".$site['date']."</td>";
+        echo "<td>".$site['website']."</td>";
+        echo "<td>".$site['bug']."</td>";
+        echo "<td>".$site['email']."</td>";
+        echo "<td>".$site['insert_admin']."</td>";
+        echo "</tr>";
+    }
+    echo "</tbody></table>";
+}
+function create_search_data($query_string)
+{
+    // echo "id LIKE '%$query_string%' OR date LIKE '%$query_string%' OR website LIKE '%$query_string%' OR bug LIKE '%$query_string%' OR email LIKE '%$query_string%' OR insert_admin LIKE '%$query_string%' id ORDER BY id LIMIT 500";
+    $sites=selectData("website_info","id LIKE '%$query_string%' OR date LIKE '%$query_string%' OR website LIKE '%$query_string%' OR bug LIKE '%$query_string%' OR email LIKE '%$query_string%' OR insert_admin LIKE '%$query_string%' ORDER BY id LIMIT 500");
+    
     echo "<tbody>";
     foreach($sites as $site)
     {

@@ -20,9 +20,9 @@ if (isset($_POST['website_link'])) {
         $count = selectCount("website_info", "website LIKE '%$site%'");
 
         if ($count <= 0) {
-            echo json_encode(" Website Not Tested! Go Ahead :) ");
+            echo json_encode('<span style="color: green;"> Website Not Tested! Go Ahead :) </span>');
         } else {
-            echo json_encode(" This Website Is Already Tested! :( ");
+            echo json_encode('<span style="color: red;"> This Website Is Already Tested! :( </span>');
         }
     }
 }
